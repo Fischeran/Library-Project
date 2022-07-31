@@ -1,15 +1,15 @@
 function getTotalBooksCount(books) {
 
-  let y = books.reduce((total, its) => {return total + 1}, 0);
+  let bookCount = books.reduce((total, its) => {return total + 1}, 0);
 
-  return y
+  return bookCount
 }
 
 function getTotalAccountsCount(accounts) {
 
-  let x = accounts.reduce((total, its) => {return total + 1}, 0);
+  let accountCount = accounts.reduce((total, its) => {return total + 1}, 0);
 
-  return x
+  return accountCount
 }
 
 function getBooksBorrowedCount(books) {
@@ -20,14 +20,18 @@ books.forEach((book) => {if (book.borrows.some((borrow) => borrow.returned === f
 return count;
 }
 
-function getMostCommonGenres(books) {
-  const genres = books.map((book) => book.genre);
 
-  function countByGenre(arr, genre) {
+//making helper function here to use in getMostCommonGenres
+
+function countByGenre(arr, genre) {
     let count = 0;
     arr.forEach((element) =>  
     {if (element.toLowerCase() === genre.toLowerCase()) {count += 1}})
-return count;};
+return count;}
+
+
+function getMostCommonGenres(books) {
+  const genres = books.map((book) => book.genre);
 
 const historyCount = countByGenre(genres, "historical fiction");
 const sciCount = countByGenre(genres, "science");
@@ -59,9 +63,9 @@ function getMostPopularBooks(books) {
   let genres = [];
 
   books.forEach((book) => {
-  let x = book.borrows.reduce((total, keys) => {return total + 1}, 0);
-  let y = {name: book.title, count: x};
-   genres.push(y);
+  let total = book.borrows.reduce((total, keys) => {return total + 1}, 0);
+  let final = {name: book.title, count: total};
+   genres.push(final);
 });
 
    let sorted = genres.sort((a,b) => b.count - a.count);
@@ -80,9 +84,9 @@ function getMostPopularAuthors(books, authors) {
   let withAuthors = [];
 
   books.forEach((book) => {
-  let xen = book.borrows.reduce((total, keys) => {return total + 1}, 0);
-  let yen = {name: book.title, count: xen, author: book.authorId};
-   unSorted.push(yen);
+  let total = book.borrows.reduce((total, keys) => {return total + 1}, 0);
+  let final = {name: book.title, count: total, author: book.authorId};
+   unSorted.push(final);
 });
 
 authors.forEach((author) => unSorted.forEach((item) => {if (item.author === author.id)

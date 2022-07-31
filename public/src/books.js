@@ -1,18 +1,18 @@
 function findAuthorById(authors, id) {
-  const x = authors.find((element) => element.id === id);
-  return x;
+  const foundAuthor = authors.find((author) => author.id === id);
+  return foundAuthor;
 }
 
 function findBookById(books, id) {
-  const y = books.find((element) => element.id === id);
-  return y;
+  const foundBook = books.find((book) => book.id === id);
+  return foundBook;
 }
 
 function partitionBooksByBorrowedStatus(books) {
-let checkedOut = [];
-let returned = [];
 
-books.forEach((element) => {if (element.borrows.some((borrow) => borrow.returned === false) === true) {checkedOut.push(element)} else {returned.push(element)}} );
+
+let checkedOut = books.filter((book) => (book.borrows.some((borrow) => borrow.returned === false) === true));
+let returned = books.filter((book) => (book.borrows.some((borrow) => borrow.returned === false) === false));
 
 const status = [ [...checkedOut], [...returned ]];
 
